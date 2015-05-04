@@ -113,7 +113,11 @@ class PhantomJS extends ConverterAbstract
      * @var array
      */
     protected $supportedPhantomFlags = [
-        'ignore-ssl-errors'
+        'disk-cache',
+        'ignore-ssl-errors',
+        'load-images',
+        'local-to-remote-url-access',
+        'web-security'
     ];
 
     /**
@@ -216,7 +220,7 @@ class PhantomJS extends ConverterAbstract
         if(!$value) {
             unset($this->phantomFlags[$key]);
         } else {
-            $this->phantomFlags[$key] = true
+            $this->phantomFlags[$key] = true;
         }
     }
 
