@@ -217,7 +217,7 @@ class PhantomJS extends ConverterAbstract
             throw new Exception('Unsupported PhantomJS flag.');
         }
 
-        if(!$value) {
+        if(!$enabled) {
             unset($this->phantomFlags[$key]);
         } else {
             $this->phantomFlags[$key] = true;
