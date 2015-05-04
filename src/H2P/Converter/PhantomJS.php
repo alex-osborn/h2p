@@ -265,9 +265,9 @@ class PhantomJS extends ConverterAbstract
 
         $cliOptions = ' ';
 
-        foreach($this->supportedPhantomFlags as $key => $value) {
+        foreach($this->supportedPhantomFlags as $key) {
             if(isset($this->phantomFlags[$key])) {
-                $cliOptions .= escapeshellarg("--$key=yes");
+                $cliOptions .= "--$key=yes ";
             }
         }
 
