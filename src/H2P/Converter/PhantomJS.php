@@ -109,6 +109,20 @@ class PhantomJS extends ConverterAbstract
     protected $searchPaths = array();
 
     /**
+     * Supported PhantomJS CLI flags
+     * @var array
+     */
+    protected $supportedPhantomFlags = [
+        'ignore-ssl-errors'
+    ];
+
+    /**
+     * Optional PhantomJS CLI flags
+     * @var array
+     */
+    protected $phantomFlags = array();
+
+    /**
      * Constructor
      *
      * @param array $options
@@ -189,6 +203,23 @@ class PhantomJS extends ConverterAbstract
         return $this->searchPaths;
     }
 
+    public function setPhantomFlag($key, $enabled = false)
+    {
+        if(!is_string($key)) {
+            throw new Exception('PhantomJS flag must be a string.');
+        }
+
+        if(!in_array($key, array_keys($this->supportedPhantomFlags))) {
+            throw new Exception('Unsupported PhantomJS flag.');
+        }
+
+        if(!$value) {
+            unset($this->phantomFlags[$key]);
+        } else {
+            $this->phantomFlags[$key] = true
+        }
+    }
+
     /**
      * Returns the PhantomJS binary path based on defined Search Paths
      * 
@@ -228,7 +259,15 @@ class PhantomJS extends ConverterAbstract
         $phantomjs = $this->getPhantomPath();
         $converter = $this->getConverterPath();
 
-        return escapeshellarg($phantomjs) . ' ' . escapeshellarg($converter);
+        $cliOptions = ' ';
+
+        foreach($this->supportedPhantomFlags as $key => $value) {
+            if(isset($this->phantomFlags[$key])) {
+                $cliOptions .= escapeshellarg("--$key=yes");
+            }
+        }
+
+        return escapeshellarg($phantomjs) . $cliOptions . escapeshellarg($converter);
     }
 
     /**
