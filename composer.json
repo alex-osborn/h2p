@@ -1,9 +1,9 @@
 {
-    "name": "kriansa/h2p",
+    "name": "alex-osborn/h2p",
     "type": "library",
-    "description": "A simple library to convert HTML files to PDF using PhantomJS",
+    "description": "A simple library to convert HTML files to PDF using PhantomJS. Forked from kriansa/h2p.",
     "keywords": ["html", "pdf", "phantomjs"],
-    "homepage": "http://github.com/kriansa/h2p",
+    "homepage": "http://github.com/alex-osborn/h2p",
     "license": "MIT",
     "authors": [
         {
